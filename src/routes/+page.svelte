@@ -19,8 +19,9 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	
+	<title>welcome to your-tribe-for-life-profile-card</title>
+	<link rel="preload" href="https://brilletjes-squad-page.onrender.com" as="document">
+	<link rel="preload" href="https://book-of-potions.onrender.com" as="document">
 </svelte:head>
 
 <main>
