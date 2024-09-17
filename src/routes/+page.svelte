@@ -25,7 +25,7 @@
 </svelte:head>
 
 <main>
-	<section id="cover-1" class="covers" tabindex="0">
+	<section id="cover-1" class="covers" >
 		<a href="#cover-2" class="frame">
 			<div class="pics-container">
 				<!-- <span class="profile profile-1">
@@ -41,22 +41,25 @@
 			<h1 class="name">{peep.name} {peep.surname}</h1>
 		</a>
 	</section>
-	<section id="cover-2" class="covers " tabindex="0">
+	<section id="cover-2" class="covers " >
 		<a href="#cover-3" class="frame">
 			<div class="side-info scalloped-box">
 				<ul>
 					<li> squad-id {peep.squad_id}</li>
 					<li> role {peep.role}</li>
-					<li> hobbies {peep.bio}</li>
+					<li> hobbies {peep.hobbies}</li>
 					<li> and more </li>
 				</ul>
 			</div>
 			<div class="bio">
-				<p>	bio {peep.bio}</p>
+				{#if peep }
+				<p> {peep.bio}</p>
+				{:else}
 				<p>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae rem vero nobis perferendis, quas id! Debitis nostrum, delectus culpa voluptates veritatis voluptatibus earum ratione dignissimos id magni, inventore molestiae ducimus.
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae rem vero nobis perferendis, quas id! Debitis nostrum, delectus culpa voluptates veritatis voluptatibus earum ratione dignissimos id magni, inventore molestiae ducimus.
 				</p>
+				{/if}
 			</div>
 			<div class="side-pic">
 				<img src="/IMG_8452.JPEG" alt="{peep.name}">
@@ -66,7 +69,7 @@
 			</div> -->
 		</a>
 	</section>
-	<section id="cover-3" class="covers frame" tabindex="0">
+	<section id="cover-3" class="covers frame" >
 		
 			<section class="mainG">
 				<article class="top top_1">
@@ -77,7 +80,7 @@
 					
 				<article class="mid mid_1">4</article>  
 				<article class="mid mid_2">
-					<a href="#cover-5" class="frame stamp box" style="color: transparent;">
+					<a href="#cover-5" class="frame stamp" style="color: transparent;">
 						next
 					</a>
 
@@ -106,7 +109,7 @@
 	<!-- <section id="cover-4" class="covers" tabindex="0">
 		<a href="#cover-5" class="frame">4</a>
 	</section> -->
-	<section id="cover-5" class="covers" tabindex="0">
+	<section id="cover-5" class="covers" >
 		<a href="#cover-1" class="frame">
 			
 			<ul>
@@ -115,6 +118,10 @@
 				<li>linkedin</li>
 				<li>arena</li>
 			</ul>
+
+			<div>
+				<!-- <p>profile card semester 13</p> -->
+			</div>
 		</a>
 	</section>
 </main>
@@ -158,8 +165,8 @@ main{
 	width: 100%;
 	height: 100vh;
 	/* background-color: rgba(88, 88, 88, 0.5); */
-	/* overflow-x: scroll ;
-	overflow-y: hidden; */
+	/* overflow-x: scroll ; */
+	overflow-y: hidden;
 	background-image: url(/Passepartout_Fotografie-Studio_Italy-47-brushed-3840x2550.jpg);
 	background-position: center;
 	background-size: cover;
@@ -183,20 +190,20 @@ main {
 	/* flex-direction: row; */
 	background-color: rgba(212, 212, 212, 0.741);
 	overflow-x: auto;
-	/* overflow-y: hidden; */
-	scroll-snap-type: inline proximity;
+	overflow-y: hidden;
+	scroll-snap-type: inline mandatory;
 	scroll-behavior: smooth;
 	z-index: 1;
 }
 
-.covers, &:focus-within{
+.covers{
 	position: relative;
 	display: flex;
 	flex: 0 0 100vw;
 	width: 100vw;
 	height: 100vh;
 	/* outline: solid blue; */
-	scroll-snap-align: center;
+	scroll-snap-align:start;
 	scroll-snap-stop:always;
 	
 	/* margin-inline: 2.5px; */
@@ -234,10 +241,10 @@ main {
 	}
 }
 
-.covers:has(.frame:active,.frame:focus-within){
-	transform: translateX(13vw) scale(.6);
+.covers:has(:active,:focus-within){
+	transform: scale(.6);
 	transition: .5s ease-in-out;
-
+	
 	/* & + li{
 		transition: .2s ease-in-out;
 		transform: translateX(-23vw) scale(.6);
@@ -284,9 +291,12 @@ main {
 #cover-2::after{content: 'about';}
 #cover-3::after{content: 'work';}
 #cover-4::after{content: 'school';}
-#cover-5::after{content: 'done';}
+#cover-5::after{content: 'profile card semester 13';}
 
+
+/* ///////////// */
 /* intro section */
+/* ///////////// */
 #cover-1 a {
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
@@ -376,7 +386,10 @@ main {
 	padding-bottom: 10%; */
 }
 
-/* about section */
+
+/* //////////////////// */
+/* cover 2 about section */
+/* ///////////////////// */
 #cover-2 a{
 	grid-template-columns: 1fr 2fr;
 	grid-template-rows: 1fr 1fr 1.5fr;
@@ -458,7 +471,10 @@ main {
      0 0/calc(2*var(--r)) calc(2*var(--r)) round;
 }
 
+
+/* //////////////////////// */
 /* coner 3 grid for works */
+/* ///////////////////////// */
 #cover-3{
 	display: flex;
 }
@@ -497,7 +513,7 @@ main {
   	height:100%;
   	gap:1rem;
   
-/*   &:has(:hover) section{
+	/*   &:has(:hover) section{
     transform: rotateY(-25deg) rotateX(65deg)           scale(.6);
   } */
 
@@ -585,11 +601,26 @@ main {
 
 .mainG article.mid_2{
 	outline: none;
+	/* background-color: #000; */
+	/* display: none; */
 }
 
 .mainG article.down_2{
 	border-radius: var(--radius);
 	outline: none;
+}
+
+.mainG article.down_2 iframe{
+	border-radius: var(--radius);
+	/* outline: none; */
+	width: auto;
+	height: 100%;
+}
+
+.mainG article.down_1 img{
+	width: 100%;
+	height: 100%;
+
 }
 
 /* .move{
@@ -598,13 +629,13 @@ main {
 
 /* HTML: <div class="stamp"></div> */
 .stamp {
-  --r: 15px; /* control the radius */
-
-  /* height: 250px; */
-  aspect-ratio: 1.5;
-  padding: calc(2*var(--r));
-  background: rgba(119, 136, 153, 0.203);
-  /* outline: solid #b3b39cb8; */
+  	--r: 15px; /* control the radius */
+	width: 100%;
+  	height: 100%;
+  	/* aspect-ratio: 1.5; */
+  	padding: calc(2*var(--r));
+  	background: rgba(91, 154, 216, 0.61);
+  	/* outline: solid #b3b39cb8; */
   mask: 
     radial-gradient(var(--r),#0000 97%,#000) round 
      calc(-1.5*var(--r)) calc(-1.5*var(--r))/calc(3*var(--r)) calc(3*var(--r)), 
@@ -724,6 +755,56 @@ main {
   }
 }
 
+/* ////////////// */
+/* cover 5 ending */
+/* ////////////// */
+
+#cover-5{
+	display:grid;
+	grid-template-columns: 5fr 1fr ;
+	grid-template-rows: 1fr ;
+}
+
+#cover-5::after{
+	font-size: 9rem;
+	filter: blur(1px);
+}
+
+#cover-5 a{
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-template-rows: subgrid;
+	grid-column: 1/-1;
+	grid-row: 1/-1;
+	height: 100%;
+	
+}
+
+#cover-5 ul{
+	grid-column: 2/3;
+	grid-row: 1/-1;
+	display: flex;
+	flex-direction: column;
+	place-content:end ;
+	color: #ffffffc1;
+}
+
+#cover-5 div{
+	width: 100%;
+	height: 100%;
+	grid-column: 1/2;
+	grid-row: 1/-1;
+	display: flex;
+	flex-wrap: wrap;
+	overflow-wrap: break-word;
+}
+
+#cover-5 div:has(p){
+	/* mix-blend-mode:multiply; */
+	/* font-size:clamp(5rem,19vw,10rem); */
+	/* outline: solid red; */
+
+}
 
 
 </style>
