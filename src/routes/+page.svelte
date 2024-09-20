@@ -242,7 +242,7 @@ main {
 }
 
 .covers:has(:active,:focus-within){
-	transform: scale(.6);
+	transform: scale(.6) translateX(13vw);
 	transition: .5s ease-in-out;
 	
 	/* & + li{
