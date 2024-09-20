@@ -203,7 +203,7 @@ main {
 	width: 100vw;
 	height: 100vh;
 	/* outline: solid blue; */
-	scroll-snap-align:start;
+	scroll-snap-align:center;
 	scroll-snap-stop:always;
 	
 	/* margin-inline: 2.5px; */
@@ -291,7 +291,7 @@ main {
 #cover-2::after{content: 'about';}
 #cover-3::after{content: 'work';}
 #cover-4::after{content: 'school';}
-#cover-5::after{content: 'profile card semester 13';}
+#cover-5::after{content: 'profile card sprint 13';}
 
 
 /* ///////////// */
